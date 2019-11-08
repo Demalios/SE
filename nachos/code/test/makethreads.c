@@ -1,26 +1,33 @@
 #include "syscall.h"
 
-void putchar_thread(char c){
-    PutChar(c);
+void putchar_thread(void *c)
+{
+    PutChar((char)c);
     ThreadExit();
 }
 
-void putstring_thread(char *s)
+
+void putstring_thread(void *s)
 {
-    PutString(s);
+    PutString((char *)s);
     ThreadExit();
 }
 
 int main()
 {
     /*
-    ThreadCreate(putchar_thread, 't');
+    char *c = 't';
+    ThreadCreate(putchar_thread, c);
     PutChar('r');
     */
+
     
-    ThreadCreate(putstring_thread, "test");
+    char s[] = "test";
+
+    ThreadCreate(putstring_thread, s);
     PutString("autre");
     
+
     while(1);
     Halt();
 }

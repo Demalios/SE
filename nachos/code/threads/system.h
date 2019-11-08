@@ -34,6 +34,7 @@ extern Timer *timer;		// the hardware alarm clock
 
 #ifdef CHANGED
 #include "synchconsole.h"
+#include "synch.h"
 
 /*
     Copy String from MIPS to kernel :
@@ -52,6 +53,8 @@ int copyStringFromMachine(int from, char *to, unsigned size);
     return : number of elements copied
 */
 int copyStringToMachine(char *from, int to, unsigned size);
+
+extern Semaphore *sBuff;
 #endif // CHANGED
 
 extern Machine *machine;	// user program memory and registers
