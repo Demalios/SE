@@ -1,0 +1,46 @@
+Partie I :
+
+.1
+Une pile d'exécution est créée en fonction de l'architecture et contiendra initialement un thread pour root. 
+On stocke les registres dans un tabeau machineState, la pile d'un thread Nachos se trouve dans l'objet Threads
+
+.2
+Voir sujet.
+
+.3
+
+
+.4
+
+
+.5
+
+
+.6
+
+
+.7
+
+Partie II :
+
+.1
+
+
+.2
+
+
+.3
+
+
+.4
+
+
+
+Partie III (BONUS) :
+
+.1
+
+
+Partie IV (BONUS) :
+
+.1

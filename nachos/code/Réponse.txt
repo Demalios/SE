@@ -1,0 +1,50 @@
+Partie I :
+
+.1
+Une pile d'exécution est créée en fonction de l'architecture et contiendra initialement un thread pour root. 
+On stocke les registres dans un tabeau machineState, la pile d'un thread Nachos se trouve dans l'objet Threads
+
+.2
+Voir sujet.
+
+.3
+Voir code code/userprog/syscall.h et code/machine/start.S.
+Il se peut qu'il n'y ait pas assez de mémoire.
+
+.4
+Voir code code/userprog/userthread.cc, code/userprog/userthread.h, code/userprog/exception.cc et Makefile.common
+
+.5
+Voir code code/userprog/userthread.cc et code/userprog/userthread.h
+
+.6
+Voir code code/userprog/userthread.cc, code/userprog/userthread.h et code/userprog/exception.cc
+
+.7
+Voir code code/test/makethreads.c
+
+Partie II :
+
+.1
+voir code code/userprog/synchconsole.cc
+On peut utiliser un verrou pour nos fonctions et un verrou pour nos consoles.
+Il faut aussi protéger SynchPutString() et SynchGetString() pour éviter que les écritures se "chevauchent" entre threads.
+
+.2
+
+
+.3
+
+
+.4
+
+
+
+Partie III (BONUS) :
+
+.1
+
+
+Partie IV (BONUS) :
+
+.1

@@ -1,0 +1,8 @@
+
+--Cette ligne, et les suivantes ci-dessous, seront ignorées--
+
+M    code/Réponse.txt
+M    code/test/makethreads.c
+A    code/test/putstring.c
+M    code/userprog/exception.cc
+M    code/userprog/synchconsole.cc
