@@ -28,7 +28,7 @@ Partie II :
 .1
 voir code code/userprog/synchconsole.cc
 On peut utiliser un verrou pour nos fonctions et un verrou pour nos consoles.
-Il faut aussi protéger SynchPutString() et SynchGetString() pour éviter que les écritures se "chevauchent" entre threads.
+Il faut aussi protéger SynchPutString() et SynchGetString() pour éviter de faire 2 P() bloquants sur les sémaphores.
 
 .2
 

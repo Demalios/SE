@@ -7,10 +7,8 @@
 static Semaphore* readAvail;
 static Semaphore* writeDone;
 
-static Semaphore* consolePutString;
-static Semaphore* consoleGetString;
-static Semaphore* consolePutChar;
-static Semaphore* consoleGetChar;
+static Semaphore* consoleString;
+static Semaphore* consoleChar;
 
 static void ReadAvailHandler(void* arg) { (void) arg; readAvail->V(); }
 static void WriteDoneHandler(void* arg) { (void) arg; writeDone->V(); }
@@ -18,48 +16,44 @@ static void WriteDoneHandler(void* arg) { (void) arg; writeDone->V(); }
 SynchConsole::SynchConsole(const char* in, const char* out){
     readAvail = new Semaphore("read avail", 0);
     writeDone = new Semaphore("write done", 0);
-    consolePutString = new Semaphore("put string avail", 1);
-    consoleGetString = new Semaphore("get string avail", 1);
-    consolePutChar = new Semaphore("put char avail", 1);
-    consoleGetChar = new Semaphore("get char avail", 1);
+    consoleString = new Semaphore("console string avail", 1);
+    consoleChar = new Semaphore("console char avail", 1);
 
     console = new Console (in, out, ReadAvailHandler, WriteDoneHandler, 0);
 }
 SynchConsole::~SynchConsole(){
     delete console;
 
-    delete consoleGetChar;
-    delete consolePutChar;
-    delete consoleGetString;
-    delete consolePutString;
+    delete consoleChar;
+    delete consoleString;
     delete writeDone;
     delete readAvail;
 }
 void SynchConsole::SynchPutChar(int ch){
-    consolePutChar->P ();
+    consoleChar->P ();
     console->PutChar (ch);
     writeDone->P ();
-    consolePutChar->V ();
+    consoleChar->V ();
 }
 int SynchConsole::SynchGetChar(){
-    consoleGetChar->P ();
+    consoleChar->P ();
     readAvail->P ();
     int ret = console->GetChar ();
-    consoleGetChar->V ();
+    consoleChar->V ();
     return ret;
 }
 void SynchConsole::SynchPutString(const char s[]){
-    consolePutString->P ();
+    consoleString->P ();
     int i = 0;
 
     while(s[i] != '\0'){
         SynchPutChar (s[i]);
 	    i++;
     }
-    consolePutString->V ();
+    consoleString->V ();
 }
 void SynchConsole::SynchGetString(char* s, int n){
-    consoleGetString->P ();
+    consoleString->P ();
     char c;
     int i = 0;
 
@@ -72,6 +66,6 @@ void SynchConsole::SynchGetString(char* s, int n){
     if(c != '\0'){
 	    s[i] = '\0';
     }
-    consoleGetString->V ();
+    consoleString->V ();
 }
 #endif // CHANGED

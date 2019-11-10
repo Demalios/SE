@@ -134,7 +134,6 @@ ExceptionHandler (ExceptionType which)
 		    DEBUG ('s', "getstring, initiated by user program.\n");
 			int to = machine->ReadRegister (4);
 			int size = machine->ReadRegister (5);
-			sBuff->P ();
 			char buff[MAX_STRING_SIZE];
 			ASSERT(buff != NULL);
 
@@ -153,7 +152,6 @@ ExceptionHandler (ExceptionType which)
 			  }
 
 			synchconsole->SynchPutString(bufferString);
-			sBuff->V ();
 		    break;
 		  }
 		  case SC_ThreadCreate:

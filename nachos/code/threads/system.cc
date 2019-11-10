@@ -43,7 +43,6 @@ Machine *machine;		// user program memory and registers
 #ifdef CHANGED
 
 char* bufferString;
-Semaphore *sBuff;
 
 int copyStringFromMachine(int from, char *to, unsigned size)
 {
@@ -218,8 +217,7 @@ Initialize (int argc, char **argv)
     machine = new Machine (debugUserProg);	// this must come first
     #ifdef CHANGED
     bufferString = new char[MAX_STRING_SIZE];
-    sBuff = new Semaphore("buffer avail", 1);
-    #endif // CHANGED
+#endif // CHANGED
 #endif
 
 #ifdef FILESYS
@@ -258,7 +256,6 @@ Cleanup ()
         delete synchconsole;
         delete bufferString;
         bufferString = NULL;
-        delete sBuff;
     #endif // CHANGED
     delete machine;
     machine = NULL;
