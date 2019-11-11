@@ -31,10 +31,11 @@ On peut utiliser un verrou pour nos fonctions et un verrou pour nos consoles.
 Il faut aussi protéger SynchPutString() et SynchGetString() pour éviter de faire 2 P() bloquants sur les sémaphores.
 
 .2
-
+Malheureusement, la terminaison de Nachos est mauvaise lorsque es threads font un ThreadExit.
+voir code code/userprog/userthread.cc et code/threads/thread.cc
 
 .3
-
+Dans le cas où l'on lance plusieurs threads, la boucle for affichant 'a' les affiche pendant l'exécution des autres threads. Certains threads affichent des caractères et des 'a' s'y glissent (avant ou après).
 
 .4
 

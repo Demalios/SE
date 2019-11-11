@@ -29,6 +29,10 @@
 					// execution stack, for detecting 
 					// stack overflows
 
+#ifdef CHANGED
+    int nbThreads = 1;
+#endif
+
 //----------------------------------------------------------------------
 // ThreadList
 //      List of all threads, for debugging
@@ -55,7 +59,7 @@ Thread::Thread (const char *threadName)
 	space = currentThread->space;
     else
 	space = NULL;
-
+    
     // must be explicitly set to 0 since when Enabling interrupts,
     // DelayedLoad is called !!!
     userRegisters[LoadReg] = 0;

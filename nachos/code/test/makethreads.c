@@ -4,33 +4,49 @@
   pour lancer :
   ./userprog/nachos -rs 1234 -x ./test/makethread
   comportement attendu :
-  si les premières lignes du main sont décommentées 'r' et 't' doivent s'afficher
-  si les dernières lignes du main sont décommentées "autre" et "test" doivent s'afficher
+  > '1' et '2' doivent s'afficher à un moment dans la console
+  > "autre" et "test" doivent s'afficher à un moment dans la console
+  > 6 'a' doivent s'afficher entre les autres mots ou caractères affichés comme décrit précédemment (pour les mots, 'a' ne doit pas s'afficher entre les caracteres qui les composent)
 */
 
-void putchar_thread(char c)
+void putchar_thread(void *c)
 {
-    PutChar(c);
+    // cette convertion est utiliser pour éviter des "warnings" sur les types
+    PutChar((char)(*(char *)c));
     ThreadExit();
 }
 
 
-void putstring_thread(char *s)
+void putstring_thread(void *s)
 {
-    PutString(s);
-    ThreadExit();
+  volatile int i = 0;
+  
+  for(i = 0; i < 6; i++)
+    {
+      PutChar('a');
+    }
+  PutChar('\n');
+  PutString(s);
+  ThreadExit();
 }
+
 
 int main()
 {
-    /*
-    ThreadCreate(putchar_thread, 't');
-    PutChar('r');
-    */
+    char c = '2';
+    int i = 0;
+    ThreadCreate(putchar_thread, &c);
+    PutChar('1');
   
-    ThreadCreate(putstring_thread, "test");
-    PutString("autre");
+    ThreadCreate(putstring_thread, "test\n");
+    PutString("autre\n");
+    
+    // cette boucle d'attente est commentée pour justifier les tests fais en partie 1...
+    //while(1);
 
-    while(1);
-    Halt();
+    // ... même chose pour le halt
+    //Halt();
+    
+    ThreadExit();
+    Exit(0); // ce Exit() n'est pas atteint à cause du ThreadExit() juste avant
 }

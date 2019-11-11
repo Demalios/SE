@@ -57,6 +57,10 @@
 #define StackSize	(8 * 1024)	// in words
 
 
+#ifdef CHANGED
+extern int nbThreads;
+#endif // CHANGED
+
 // Thread state
 enum ThreadStatus
 { JUST_CREATED, RUNNING, READY, BLOCKED };

@@ -1,6 +1,7 @@
 #ifdef CHANGED
 #include "userthread.h"
-
+#include "system.h"
+#include "syscall.h"
 
 /**
  * Initialize registeries and run the thread
@@ -19,6 +20,8 @@ static void StartUserThread(void *schmurtz)
     machine->WriteRegister (StackReg, currentThread->space->AllocateUserStack());
     DEBUG ('x', "Initializing stack register to 0x%x\n",currentThread->space);
 
+    nbThreads += 1;
+    
     machine->Run();
 }
 
@@ -52,7 +55,15 @@ int do_ThreadCreate(int f, int arg)
 
 void do_ThreadExit(void)
 {
-    currentThread->Finish();
+    if(nbThreads > 1)
+      {
+	nbThreads -= 1;
+	currentThread->Finish();
+      }
+    else
+      {
+	interrupt->Halt ();
+      }
 }
 
 #endif // CHANGED
