@@ -1,0 +1,35 @@
+Partie I ( Adressage virtuel par une talbe de page ) :
+
+.1
+voir code code/test/userpages0.c
+
+.2
+On voit que l'on utilise la mémoire physique directement grâce au tableau mainMemory décrite dans machine.h comme étant la mémoire physique pour stocker les programmes utilisateur.
+
+.3
+voir code code/userprog/addrspace.cc
+(à faire : continuer de debug ReadAtVirtual et le run depuis userpages0)
+
+.4
+
+.5
+
+.6
+
+Partie II ( Exécuter plusieur programme en même temps ) :
+
+.1
+
+.2
+
+.3
+
+.4
+
+.5
+
+.6
+
+.7
+
+Partie III ( BONUS : Shell ) : 

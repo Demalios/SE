@@ -29,6 +29,32 @@
 //      endian machine, and we're now running on a big endian machine.
 //----------------------------------------------------------------------
 
+
+#ifdef CHANGED
+static void ReadAtVirtual(OpenFile* executable, int virtualAddr, int numBytes, int position, TranslationEntry *pageTable, unsigned numPages)
+{
+    char *buff = new char(numBytes);
+    int numReads = executable->ReadAt(&buff, numBytes, position);
+    
+    TranslationEntry *tmpPageTable = machine->pageTable;
+    unsigned tmpNumPages = machine->pageTableSize;
+
+    machine->pageTable = pageTable;
+    machine->pageTableSize = numPages;
+
+    for(int i = 0; i < numReads; i++)
+    {
+        machine->WriteMem(virtualAddr, 1, buff);
+    }
+
+    machine->pageTable = tmpPageTable;
+    machine->pageTableSize = tmpNumPages;
+
+    delete buff;
+}
+#endif // CHANGED
+
+
 static void
 SwapHeader (NoffHeader * noffH)
 {
@@ -110,17 +136,21 @@ AddrSpace::AddrSpace (OpenFile * executable)
       {
 	  DEBUG ('a', "Initializing code segment, at 0x%x, size 0x%x\n",
 		 noffH.code.virtualAddr, noffH.code.size);
-	  executable->ReadAt (&(machine->mainMemory[noffH.code.virtualAddr]),
-			      noffH.code.size, noffH.code.inFileAddr);
+        #ifdef CHANGED
+        ReadAtVirtual(executable, noffH.code.virtualAddr, noffH.initData.size, noffH.initData.inFileAddr, pageTable, numPages);
+        #else
+	    executable->ReadAt (&(machine->mainMemory[noffH.code.virtualAddr]), noffH.code.size, noffH.code.inFileAddr);
+        #endif // CHANGED
       }
     if (noffH.initData.size > 0)
       {
 	  DEBUG ('a', "Initializing data segment, at 0x%x, size 0x%x\n",
 		 noffH.initData.virtualAddr, noffH.initData.size);
-	  executable->ReadAt (&
-			      (machine->mainMemory
-			       [noffH.initData.virtualAddr]),
-			      noffH.initData.size, noffH.initData.inFileAddr);
+        #ifdef CHANGED
+        ReadAtVirtual(executable, noffH.code.virtualAddr, noffH.initData.size, noffH.initData.inFileAddr, pageTable, numPages);
+        #else
+	    executable->ReadAt (&(machine->mainMemory[noffH.initData.virtualAddr]), noffH.initData.size, noffH.initData.inFileAddr);
+        #endif // CHANGED
       }
 
     DEBUG ('a', "Area for stacks at 0x%x, size 0x%x\n",
