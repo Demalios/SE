@@ -11,8 +11,12 @@ voir code code/userprog/addrspace.cc
 (à faire : continuer de debug ReadAtVirtual et le run depuis userpages0)
 
 .4
+voir code code/userprog/addrspace.cc
 
 .5
+A COMPLETER :
+voir code code/userprog/pageprovider.cc voir code code/userprog/pageprovider.h
+On n'utilise qu'un seul objet de la classe PageProvider parce qu'une seule table de pages à la fois est nécessaire.
 
 .6
 

@@ -22,38 +22,43 @@
 #include "syscall.h"
 #include "new"
 
-//----------------------------------------------------------------------
-// SwapHeader
-//      Do little endian to big endian conversion on the bytes in the 
-//      object file header, in case the file was generated on a little
-//      endian machine, and we're now running on a big endian machine.
-//----------------------------------------------------------------------
-
-
 #ifdef CHANGED
 static void ReadAtVirtual(OpenFile* executable, int virtualAddr, int numBytes, int position, TranslationEntry *pageTable, unsigned numPages)
 {
-    char *buff = new char(numBytes);
-    int numReads = executable->ReadAt(&buff, numBytes, position);
-    
+    DEBUG('s', "starting ReadAtVirtual\n");
+    char *buff = new char[numBytes];
+
     TranslationEntry *tmpPageTable = machine->pageTable;
     unsigned tmpNumPages = machine->pageTableSize;
 
     machine->pageTable = pageTable;
     machine->pageTableSize = numPages;
 
-    for(int i = 0; i < numReads; i++)
+    int numRead = executable->ReadAt(buff, numBytes, position);
+    
+    DEBUG('s', "numRead %d, numBytes %d\n", numRead, numBytes);
+
+    DEBUG('s', "starting for loop\n");
+    for(int i = 0; i < numRead; i++)
     {
-        machine->WriteMem(virtualAddr, 1, buff);
+        machine->WriteMem(virtualAddr+i, 1, buff[i]);
     }
+    DEBUG('s', "ending for loop\n");
 
     machine->pageTable = tmpPageTable;
     machine->pageTableSize = tmpNumPages;
 
-    delete buff;
+    delete []buff;
+    DEBUG('s', "finishing ReadAtVirtual\n");
 }
 #endif // CHANGED
 
+//----------------------------------------------------------------------
+// SwapHeader
+//      Do little endian to big endian conversion on the bytes in the 
+//      object file header, in case the file was generated on a little
+//      endian machine, and we're now running on a big endian machine.
+//----------------------------------------------------------------------
 
 static void
 SwapHeader (NoffHeader * noffH)
@@ -122,7 +127,11 @@ AddrSpace::AddrSpace (OpenFile * executable)
     pageTable = new TranslationEntry[numPages];
     for (i = 0; i < numPages; i++)
       {
+      #ifdef CHANGED
+      pageTable[i].physicalPage = i+1;
+      #else
 	  pageTable[i].physicalPage = i;	// for now, phys page # = virtual page #
+      #endif // CHANGED
 	  pageTable[i].valid = TRUE;
 	  pageTable[i].use = FALSE;
 	  pageTable[i].dirty = FALSE;
@@ -137,7 +146,7 @@ AddrSpace::AddrSpace (OpenFile * executable)
 	  DEBUG ('a', "Initializing code segment, at 0x%x, size 0x%x\n",
 		 noffH.code.virtualAddr, noffH.code.size);
         #ifdef CHANGED
-        ReadAtVirtual(executable, noffH.code.virtualAddr, noffH.initData.size, noffH.initData.inFileAddr, pageTable, numPages);
+        ReadAtVirtual(executable, noffH.code.virtualAddr, noffH.code.size, noffH.code.inFileAddr, pageTable, numPages);
         #else
 	    executable->ReadAt (&(machine->mainMemory[noffH.code.virtualAddr]), noffH.code.size, noffH.code.inFileAddr);
         #endif // CHANGED
@@ -147,7 +156,7 @@ AddrSpace::AddrSpace (OpenFile * executable)
 	  DEBUG ('a', "Initializing data segment, at 0x%x, size 0x%x\n",
 		 noffH.initData.virtualAddr, noffH.initData.size);
         #ifdef CHANGED
-        ReadAtVirtual(executable, noffH.code.virtualAddr, noffH.initData.size, noffH.initData.inFileAddr, pageTable, numPages);
+        ReadAtVirtual(executable, noffH.initData.virtualAddr, noffH.initData.size, noffH.initData.inFileAddr, pageTable, numPages);
         #else
 	    executable->ReadAt (&(machine->mainMemory[noffH.initData.virtualAddr]), noffH.initData.size, noffH.initData.inFileAddr);
         #endif // CHANGED
