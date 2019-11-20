@@ -1,42 +1,66 @@
 #ifdef CHANGED
 
 #include "copyright.h"
+#include "pageprovider.h"
 
 
-class PageProvider
+PageProvider::PageProvider(int nbItems)
 {
-    public:
-    PageProvider::PageProvider(int nbItems)
+  map = new BitMap(nbItems);
+  
+  nbPages = nbItems;
+  pages = new TranslationEntry[nbPages];
+
+  for(int i = 0; i < nbPages; i++)
     {
-        BitMap *map = new Bitmap(nbItems);
-
-        nbPages = nbItems;
+      pages[i].physicalPage = i+1;
+      pages[i].valid = TRUE;
+      pages[i].use = FALSE;
+      pages[i].dirty = FALSE;
+      pages[i].readOnly = FALSE;
     }
+}
 
 
-    ~PageProvider::PageProvider()
+PageProvider::~PageProvider()
+{
+  delete map;
+  delete [] pages;
+}
+
+
+int PageProvider::GetEmptyPage()
+{
+  if(map->NumClear() > 0)
     {
-        delete [] page;
+      int pageLibre = map->Find();
+	    
+      memset (&pages[pageLibre], 0, sizeof(TranslationEntry));
+      return pageLibre;
     }
+  return -1;
+}
 
 
-    void PageProvider::GetEmptyPage()
-    {
-
-    }
-
-
-    void PageProvider::ReleasePage()
-    {
-        
-    }
+void PageProvider::ReleasePage(int ind)
+{
+  map->Clear(ind);
+}
 
 
-    int PageProvider::NumAvailPage()
-    {
-        return 0;
-    }
-};
+int PageProvider::NumAvailPage()
+{
+  return map->NumClear();
+}
 
+int PageProvider::GetNbPages()
+{
+  return nbPages;
+}
 
-#endif
+TranslationEntry *PageProvider::GetPages()
+{
+  return pages;
+}
+
+#endif // CHANGED

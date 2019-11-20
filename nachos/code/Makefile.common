@@ -30,8 +30,10 @@ THREAD_O	:=	main.o list.o scheduler.o synch.o synchlist.o \
 			system.o thread.o utility.o threadtest.o interrupt.o \
 			stats.o sysdep.o timer.o
 
+#ifdef CHANGED
 USERPROG_O	:=	addrspace.o bitmap.o exception.o progtest.o console.o synchconsole.o \
-			machine.o mipssim.o translate.o userthread.o
+			machine.o mipssim.o translate.o userthread.o pageprovider.o
+#endif // CHANGED
 
 VM_O		:=
 

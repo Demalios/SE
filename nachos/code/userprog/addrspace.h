@@ -18,6 +18,9 @@
 #include "translate.h"
 #include "noff.h"
 #include "list.h"
+#ifdef CHANGED
+#include "pageprovider.h"
+#endif // CHANGED
 
 #define UserStacksAreaSize		1024	// increase this as necessary!
 
@@ -39,17 +42,24 @@ class AddrSpace:dontcopythis
 		    unsigned physical_x, unsigned virtual_y, unsigned y,
 		    unsigned blocksize);
 				// Dump program layout as SVG
+#ifdef CHANGED
+    unsigned NumPages() { return pageP->GetNbPages(); }
+#else
     unsigned NumPages() { return numPages; }
-    #ifdef CHANGED
+#endif // CHANGED
+#ifdef CHANGED
     int AllocateUserStack();
-    #endif //CHANGED
+#endif //CHANGED
     
   private:
     NoffHeader noffH;		// Program layout
 
+#ifdef CHANGED
+    PageProvider *pageP;
+#else
     TranslationEntry * pageTable; // Page table
     unsigned int numPages;	// Number of pages in the page table
-    
+#endif // CHANGED
 };
 
 extern List AddrspaceList;
