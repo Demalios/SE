@@ -42,11 +42,8 @@ class AddrSpace:dontcopythis
 		    unsigned physical_x, unsigned virtual_y, unsigned y,
 		    unsigned blocksize);
 				// Dump program layout as SVG
-#ifdef CHANGED
-    unsigned NumPages() { return pageP->GetNbPages(); }
-#else
     unsigned NumPages() { return numPages; }
-#endif // CHANGED
+    
 #ifdef CHANGED
     int AllocateUserStack();
 #endif //CHANGED
@@ -56,10 +53,9 @@ class AddrSpace:dontcopythis
 
 #ifdef CHANGED
     PageProvider *pageP;
-#else
+#endif // CHANGED
     TranslationEntry * pageTable; // Page table
     unsigned int numPages;	// Number of pages in the page table
-#endif // CHANGED
 };
 
 extern List AddrspaceList;

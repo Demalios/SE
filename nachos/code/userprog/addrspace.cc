@@ -99,11 +99,7 @@ List AddrSpaceList;
 
 AddrSpace::AddrSpace (OpenFile * executable)
 {
-#ifdef CHANGED
-    unsigned int size;
-#else
     unsigned int i, size;
-#endif // CHANGED
     
     executable->ReadAt (&noffH, sizeof (noffH), 0);
     if ((noffH.noffMagic != NOFFMAGIC) &&
@@ -115,11 +111,7 @@ AddrSpace::AddrSpace (OpenFile * executable)
 // how big is address space?
     size = noffH.code.size + noffH.initData.size + noffH.uninitData.size + UserStacksAreaSize;	// we need to increase the size
     // to leave room for the stack
-#ifdef CHANGED 
-    unsigned int numPages = divRoundUp (size, PageSize);
-#else
     numPages = divRoundUp (size, PageSize);
-#endif // CHANGED
     size = numPages * PageSize;
 
     // check we're not trying
@@ -131,19 +123,18 @@ AddrSpace::AddrSpace (OpenFile * executable)
 
     DEBUG ('a', "Initializing address space, num pages %d, total size 0x%x\n",
 	   numPages, size);
-// first, set up the translation
-#ifdef CHANGED
-    TranslationEntry *pageTable = new TranslationEntry[numPages];
-#else
+    // first, set up the translation
     pageTable = new TranslationEntry[numPages];
-#endif // CHANGED
-
-#ifdef CHANGED
-    // work made in the constructor
-#else
+    
     for (i = 0; i < numPages; i++)
       {
+    #ifdef CHANGED
+      DEBUG('a', "pageP : %p\n", pageP);
+      DEBUG('a', "GetEmptyPage : %d\n", pageP->GetEmptyPage());
+      pageTable[i].physicalPage = pageP->GetEmptyPage();
+    #else
 	  pageTable[i].physicalPage = i;	// for now, phys page # = virtual page #
+    #endif
 	  pageTable[i].valid = TRUE;
 	  pageTable[i].use = FALSE;
 	  pageTable[i].dirty = FALSE;
@@ -151,8 +142,6 @@ AddrSpace::AddrSpace (OpenFile * executable)
 	  // a separate page, we could set its 
 	  // pages to be read-only
       }
-#endif //CHANGED
-
 // then, copy in the code and data segments into memory
     if (noffH.code.size > 0)
       {
@@ -194,9 +183,8 @@ AddrSpace::~AddrSpace ()
   // delete pageTable;
 #ifdef CHANGED
     delete [] pageP;
-#else
-    delete [] pageTable;
 #endif // CHANGED
+    delete [] pageTable;
   // End of modification
 
   AddrSpaceList.Remove(this);
@@ -230,15 +218,9 @@ AddrSpace::InitRegisters ()
     // Set the stack register to the end of the address space, where we
     // allocated the stack; but subtract off a bit, to make sure we don't
     // accidentally reference off the end!
-#ifdef CHANGED
-    machine->WriteRegister (StackReg, pageP->GetNbPages() * PageSize - 16);
-    DEBUG ('a', "Initializing stack register to 0x%x\n",
-	   pageP->GetNbPages() * PageSize - 16);
-#else
     machine->WriteRegister (StackReg, numPages * PageSize - 16);
     DEBUG ('a', "Initializing stack register to 0x%x\n",
 	   numPages * PageSize - 16);
-#endif // CHANGED
 }
 
 //----------------------------------------------------------------------
@@ -274,13 +256,8 @@ AddrSpace::Dump(FILE *output, unsigned virtual_x, unsigned virtual_width,
 		unsigned physical_x, unsigned virtual_y, unsigned y,
 		unsigned blocksize)
 {
-#ifdef CHANGED
-  unsigned ret = machine->DumpPageTable(output, pageP->GetPages(), pageP->GetNbPages(),
-	    virtual_x, virtual_width, physical_x, virtual_y, y, blocksize);
-#else
     unsigned ret = machine->DumpPageTable(output, pageTable, numPages,
 	    virtual_x, virtual_width, physical_x, virtual_y, y, blocksize);
-#endif // CHANGED
     DrawArea(output, 0, virtual_x, virtual_y, blocksize, &noffH.code, "code");
     DrawArea(output, 0, virtual_x, virtual_y, blocksize, &noffH.initData, "data");
     DrawArea(output, 0, virtual_x, virtual_y, blocksize, &noffH.uninitData, "bss");
@@ -357,23 +334,14 @@ AddrSpace::SaveState ()
 void
 AddrSpace::RestoreState ()
 {
-#ifdef CHANGED
-  machine->pageTable = pageP->GetPages();
-  machine->pageTableSize = pageP->GetNbPages();
-#else
   machine->pageTable = pageTable;
   machine->pageTableSize = numPages;
-#endif // CHANGED
 }
 
 #ifdef CHANGED
 int
 AddrSpace::AllocateUserStack ()
 {
-#ifdef CHANGED
-  return pageP->GetNbPages() * PageSize -16 -256;
-#else
   return numPages * PageSize -16 -256;
-#endif // CHANGED
 }
 #endif //CHANGED

@@ -61,6 +61,7 @@ extern Machine *machine;	// user program memory and registers
 extern SynchConsole* synchconsole;
 #define MAX_STRING_SIZE 512
 extern char* bufferString;
+extern PageProvider *pageP;
 #endif // CHANGED
 #endif
 

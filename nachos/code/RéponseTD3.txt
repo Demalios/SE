@@ -19,7 +19,7 @@ On n'utilise qu'un seul objet de la classe PageProvider parce qu'une seule table
 
 .6
 A FINIR ET TESTER
-voir code/Makefile.common code/userprog/addrspace.cc code/userprog/addrspace.h
+voir code/Makefile.common code/userprog/addrspace.cc code/userprog/addrspace.h code/threads/system.cc     
 
 
 Partie II ( Exécuter plusieur programme en même temps ) :

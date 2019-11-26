@@ -1,43 +1,36 @@
 #ifdef CHANGED
 
-#include "copyright.h"
+#include "system.h"
 #include "pageprovider.h"
 
-
-PageProvider::PageProvider(int nbItems)
+PageProvider::PageProvider()
 {
-  map = new BitMap(nbItems);
-  
-  nbPages = nbItems;
-  pages = new TranslationEntry[nbPages];
-
-  for(int i = 0; i < nbPages; i++)
-    {
-      pages[i].physicalPage = i+1;
-      pages[i].valid = TRUE;
-      pages[i].use = FALSE;
-      pages[i].dirty = FALSE;
-      pages[i].readOnly = FALSE;
-    }
+  map = new BitMap(NumPhysPages);
 }
 
 
 PageProvider::~PageProvider()
 {
   delete map;
-  delete [] pages;
 }
 
 
 int PageProvider::GetEmptyPage()
 {
+  DEBUG('a', "Entering GetEmptyPage \n");
+  
+  DEBUG('a', "map : %p\n", map);
+  DEBUG('a', "NumClear : %d\n", map->NumClear());
+
   if(map->NumClear() > 0)
     {
-      int pageLibre = map->Find();
+      int freePage = map->Find();
+      DEBUG('a', "freePage : %d\n", freePage);
 	    
-      memset (&pages[pageLibre], 0, sizeof(TranslationEntry));
-      return pageLibre;
+      memset (&machine->mainMemory[freePage * PageSize], 0, PageSize);
+      return freePage;
     }
+
   return -1;
 }
 
@@ -51,16 +44,6 @@ void PageProvider::ReleasePage(int ind)
 int PageProvider::NumAvailPage()
 {
   return map->NumClear();
-}
-
-int PageProvider::GetNbPages()
-{
-  return nbPages;
-}
-
-TranslationEntry *PageProvider::GetPages()
-{
-  return pages;
 }
 
 #endif // CHANGED

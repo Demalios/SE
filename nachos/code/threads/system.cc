@@ -43,6 +43,7 @@ Machine *machine;		// user program memory and registers
 #ifdef CHANGED
 
 char* bufferString;
+PageProvider *pageP;
 
 int copyStringFromMachine(int from, char *to, unsigned size)
 {
@@ -215,8 +216,9 @@ Initialize (int argc, char **argv)
 
 #ifdef USER_PROGRAM
     machine = new Machine (debugUserProg);	// this must come first
-    #ifdef CHANGED
+#ifdef CHANGED
     bufferString = new char[MAX_STRING_SIZE];
+    pageP = new PageProvider();
 #endif // CHANGED
 #endif
 
@@ -255,6 +257,7 @@ Cleanup ()
     #ifdef CHANGED
         delete synchconsole;
         delete bufferString;
+        delete pageP;
         bufferString = NULL;
     #endif // CHANGED
     delete machine;

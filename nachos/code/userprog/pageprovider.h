@@ -1,23 +1,42 @@
 #ifdef CHANGED
 
-#include "bitmap.h"
-#include "translate.h"
+#ifndef PAGEPROVIDER_H
+#define PAGEPROVIDER_H
 
-class PageProvider
+#include "bitmap.h"
+
+class PageProvider:dontcopythis
 {
     public:
-    PageProvider(int nbItems);
+    PageProvider();
     ~PageProvider();
+
+    /**
+     * task : gets index of an empty page
+     * return : the index of an empty page
+    **/
     int GetEmptyPage();
+
+
+    /**
+     * task : free memory used by a page
+     * return : none
+     * ind : index of the page to release
+    **/
     void ReleasePage(int ind);
+
+
+    /**
+     * task : gets the number of avail pages
+     * return : the number of avail pages
+    **/
     int NumAvailPage();
-    int GetNbPages();
-    TranslationEntry *GetPages();
+
 
     private:
     BitMap *map;
-    int nbPages;
-    TranslationEntry *pages;
 };
+
+#endif // PAGEPROVIDER_H
 
 #endif // CHANGED
