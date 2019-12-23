@@ -33,6 +33,14 @@ extern int do_ThreadCreate(int f, int arg);
 **/
 extern void do_ThreadExit(void);
 
+
+/**
+ * Create a new main thread, initialize it and put it in the excecution queue
+ * > s : path to an executable
+ * return : 1 if it works, else -1
+**/
+extern int do_ForkExec(const char *s);
+
  #endif
 
  #endif // CHANGED

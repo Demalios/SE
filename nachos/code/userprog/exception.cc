@@ -175,6 +175,20 @@ ExceptionHandler (ExceptionType which)
 
 		    break;
 		  }
+		  case SC_ForkExec:
+		  {
+		    DEBUG ('x', "ForkExec, initiated by user program.\n");
+			
+			int arg = machine->ReadRegister (4);
+
+			copyStringFromMachine(arg, bufferString, MAX_STRING_SIZE);
+
+			int ret = do_ForkExec(bufferString);
+
+			machine->WriteRegister (2, ret);
+			DEBUG ('x', "ForkExec finished.\n");
+		    break;
+		  }
 		#endif // CHANGED
 		default:
 		  {

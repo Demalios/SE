@@ -18,13 +18,14 @@ voir code code/userprog/pageprovider.cc voir code code/userprog/pageprovider.h
 On n'utilise qu'un seul objet de la classe PageProvider parce qu'une seule table de pages à la fois est nécessaire.
 
 .6
-A FINIR ET TESTER
-voir code/Makefile.common code/userprog/addrspace.cc code/userprog/addrspace.h code/threads/system.cc     
+voir code/Makefile.common code/userprog/addrspace.cc code/userprog/addrspace.h code/threads/system.cc
+On risque d'avoir trop de pages demandées par rapport à notre capacité maximale, d'où un ASSERT pour le vérifier.
 
 
 Partie II ( Exécuter plusieur programme en même temps ) :
 
 .1
+code/test/start.S
 
 .2
 
@@ -32,10 +33,10 @@ Partie II ( Exécuter plusieur programme en même temps ) :
 
 .4
 
-.5
+.5 ( BONUS )
 
-.6
+.6 ( BONUS )
 
-.7
+.7 ( BONUS )
 
 Partie III ( BONUS : Shell ) : 

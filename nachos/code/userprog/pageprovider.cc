@@ -5,13 +5,17 @@
 
 PageProvider::PageProvider()
 {
+  DEBUG('a', "Entering constructor \n");
   map = new BitMap(NumPhysPages);
+  DEBUG('a', "Exiting constructor \n");
 }
 
 
 PageProvider::~PageProvider()
 {
+  DEBUG('a', "Entering destructor \n");
   delete map;
+  DEBUG('a', "Exiting destructor \n");
 }
 
 
@@ -19,6 +23,8 @@ int PageProvider::GetEmptyPage()
 {
   DEBUG('a', "Entering GetEmptyPage \n");
   
+  ASSERT(map->NumClear() > NumPhysPages);
+
   DEBUG('a', "map : %p\n", map);
   DEBUG('a', "NumClear : %d\n", map->NumClear());
 

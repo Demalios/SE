@@ -170,6 +170,8 @@ AddrSpace::AddrSpace (OpenFile * executable)
     pageTable[0].valid = FALSE;			// Catch NULL dereference
 
     AddrSpaceList.Append(this);
+
+    machine->DumpMem("fork.svg");
 }
 
 //----------------------------------------------------------------------

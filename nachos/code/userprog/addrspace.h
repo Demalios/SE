@@ -51,9 +51,6 @@ class AddrSpace:dontcopythis
   private:
     NoffHeader noffH;		// Program layout
 
-#ifdef CHANGED
-    PageProvider *pageP;
-#endif // CHANGED
     TranslationEntry * pageTable; // Page table
     unsigned int numPages;	// Number of pages in the page table
 };

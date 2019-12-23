@@ -1,4 +1,6 @@
 #ifdef CHANGED
+#include <string.h>
+
 #include "userthread.h"
 #include "system.h"
 #include "syscall.h"
@@ -64,6 +66,45 @@ void do_ThreadExit(void)
       {
 	interrupt->Halt ();
       }
+}
+
+
+int do_ForkExec(const char *s)
+{
+    // TODO
+    OpenFile *executable = fileSystem->Open(s);
+
+    if (executable == NULL)
+      {
+	  SetColor (stdout, ColorRed);
+	  SetBold (stdout);
+	  printf ("Unable to open file %s\n", s);
+	  ClearColor (stdout);
+	  return -1;
+      }
+
+    // thread create
+    try
+    {
+        DEBUG ('x', "creating thread\n");
+        Thread* newThread = new Thread("New Thread") ;
+
+        newThread->space = new AddrSpace (executable);
+        newThread->space->InitRegisters ();	// set the initial register values
+        newThread->space->RestoreState ();	// load page table register
+        DEBUG ('x', "thread created\n");
+
+        delete executable;		// close file
+        machine->Run();
+    }
+    catch(int e)
+    {
+        DEBUG ('x', "Error in ForkExec().\n");
+        delete executable;		// close file
+        return -1;
+    }
+
+    return 1;
 }
 
 #endif // CHANGED
