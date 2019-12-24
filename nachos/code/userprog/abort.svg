@@ -363,22 +363,22 @@
 <rect x="1712" y="960" width="16" height="16" fill="#008000" stroke="#000000" stroke-width="1"/>
 <rect x="1728" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="1744" y="960" width="16" height="16" fill="#400000" stroke="#000000" stroke-width="1"/>
-<rect x="1760" y="960" width="16" height="16" fill="#804000" stroke="#000000" stroke-width="1"/>
+<rect x="1760" y="960" width="16" height="16" fill="#40e040" stroke="#000000" stroke-width="1"/>
 <rect x="1776" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
-<rect x="1792" y="960" width="16" height="16" fill="#e0e080" stroke="#000000" stroke-width="1"/>
-<rect x="1808" y="960" width="16" height="16" fill="#e02080" stroke="#000000" stroke-width="1"/>
-<rect x="1824" y="960" width="16" height="16" fill="#004000" stroke="#000000" stroke-width="1"/>
+<rect x="1792" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="1808" y="960" width="16" height="16" fill="#002000" stroke="#000000" stroke-width="1"/>
+<rect x="1824" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="1840" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
-<rect x="1856" y="960" width="16" height="16" fill="#00c080" stroke="#000000" stroke-width="1"/>
-<rect x="1872" y="960" width="16" height="16" fill="#e02080" stroke="#000000" stroke-width="1"/>
-<rect x="1888" y="960" width="16" height="16" fill="#002000" stroke="#000000" stroke-width="1"/>
+<rect x="1856" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="1872" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="1888" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="1904" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
-<rect x="1920" y="960" width="16" height="16" fill="#0080c0" stroke="#000000" stroke-width="1"/>
-<rect x="1936" y="960" width="16" height="16" fill="#600000" stroke="#000000" stroke-width="1"/>
-<rect x="1952" y="960" width="16" height="16" fill="#006000" stroke="#000000" stroke-width="1"/>
+<rect x="1920" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="1936" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="1952" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="1968" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
-<rect x="1984" y="960" width="16" height="16" fill="#a0e080" stroke="#000000" stroke-width="1"/>
-<rect x="2000" y="960" width="16" height="16" fill="#e08000" stroke="#000000" stroke-width="1"/>
+<rect x="1984" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="2000" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="2016" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="2032" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="2048" y="960" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
@@ -1557,7 +1557,7 @@
 <text x="64" y="960" stroke="#FF0000" fill="#FF0000" font-size="16">PC</text>
 <line x1="88" y1="952" x2="104" y2="952" stroke="#808080" stroke-width="1"/>
 <text x="64" y="832" stroke="#FF0000" fill="#FF0000" font-size="16">SP</text>
-<line x1="88" y1="824" x2="1384" y2="824" stroke="#808080" stroke-width="1"/>
+<line x1="88" y1="824" x2="1000" y2="824" stroke="#808080" stroke-width="1"/>
 <rect x="96" y="768" width="16" height="16" fill="#602080" stroke="#000000" stroke-width="1"/>
 <rect x="112" y="768" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="128" y="768" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
@@ -4112,22 +4112,22 @@
 <rect x="4240" y="896" width="16" height="16" fill="#008000" stroke="#000000" stroke-width="1"/>
 <rect x="4256" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="4272" y="896" width="16" height="16" fill="#400000" stroke="#000000" stroke-width="1"/>
-<rect x="4288" y="896" width="16" height="16" fill="#804000" stroke="#000000" stroke-width="1"/>
+<rect x="4288" y="896" width="16" height="16" fill="#40e040" stroke="#000000" stroke-width="1"/>
 <rect x="4304" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
-<rect x="4320" y="896" width="16" height="16" fill="#e0e080" stroke="#000000" stroke-width="1"/>
-<rect x="4336" y="896" width="16" height="16" fill="#e02080" stroke="#000000" stroke-width="1"/>
-<rect x="4352" y="896" width="16" height="16" fill="#004000" stroke="#000000" stroke-width="1"/>
+<rect x="4320" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="4336" y="896" width="16" height="16" fill="#002000" stroke="#000000" stroke-width="1"/>
+<rect x="4352" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="4368" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
-<rect x="4384" y="896" width="16" height="16" fill="#00c080" stroke="#000000" stroke-width="1"/>
-<rect x="4400" y="896" width="16" height="16" fill="#e02080" stroke="#000000" stroke-width="1"/>
-<rect x="4416" y="896" width="16" height="16" fill="#002000" stroke="#000000" stroke-width="1"/>
+<rect x="4384" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="4400" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="4416" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="4432" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
-<rect x="4448" y="896" width="16" height="16" fill="#0080c0" stroke="#000000" stroke-width="1"/>
-<rect x="4464" y="896" width="16" height="16" fill="#600000" stroke="#000000" stroke-width="1"/>
-<rect x="4480" y="896" width="16" height="16" fill="#006000" stroke="#000000" stroke-width="1"/>
+<rect x="4448" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="4464" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="4480" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="4496" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
-<rect x="4512" y="896" width="16" height="16" fill="#a0e080" stroke="#000000" stroke-width="1"/>
-<rect x="4528" y="896" width="16" height="16" fill="#e08000" stroke="#000000" stroke-width="1"/>
+<rect x="4512" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
+<rect x="4528" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="4544" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="4560" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>
 <rect x="4576" y="896" width="16" height="16" fill="#000000" stroke="#000000" stroke-width="1"/>

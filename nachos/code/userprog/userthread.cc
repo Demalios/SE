@@ -69,11 +69,20 @@ void do_ThreadExit(void)
 }
 
 
+static void StartUserFork(void *thread)
+{
+  Thread *t = (Thread *)thread;
+  t->space->InitRegisters ();	// set the initial register values
+  t->space->RestoreState ();	// load page table register
+  machine->Run();
+}
+
+
 int do_ForkExec(const char *s)
 {
     DEBUG ('s', "start ForkExec\n");
     OpenFile *executable = fileSystem->Open(s);
-
+    
     if (executable == NULL)
       {
 	  SetColor (stdout, ColorRed);
@@ -90,12 +99,13 @@ int do_ForkExec(const char *s)
         Thread* newThread = new Thread("New Thread") ;
 
         newThread->space = new AddrSpace (executable);
-        newThread->space->InitRegisters ();	// set the initial register values
-        newThread->space->RestoreState ();	// load page table register
+	newThread->Start(StartUserFork, newThread);
+        //newThread->space->InitRegisters ();	// set the initial register values
+        //newThread->space->RestoreState ();	// load page table register
         DEBUG ('s', "thread created\n");
 
         delete executable;		// close file
-        machine->Run();
+        //machine->Run();
     }
     catch(int e)
     {
@@ -106,5 +116,6 @@ int do_ForkExec(const char *s)
 
     return 1;
 }
+
 
 #endif // CHANGED
