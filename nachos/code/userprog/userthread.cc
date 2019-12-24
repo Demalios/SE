@@ -71,7 +71,6 @@ void do_ThreadExit(void)
 
 int do_ForkExec(const char *s)
 {
-    // TODO
     OpenFile *executable = fileSystem->Open(s);
 
     if (executable == NULL)
