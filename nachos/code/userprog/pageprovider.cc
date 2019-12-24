@@ -23,7 +23,7 @@ int PageProvider::GetEmptyPage()
 {
   DEBUG('a', "Entering GetEmptyPage \n");
   
-  ASSERT(map->NumClear() > NumPhysPages);
+  ASSERT(map->NumClear() <= NumPhysPages);
 
   DEBUG('a', "map : %p\n", map);
   DEBUG('a', "NumClear : %d\n", map->NumClear());
