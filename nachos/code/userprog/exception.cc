@@ -156,7 +156,7 @@ ExceptionHandler (ExceptionType which)
 		  }
 		  case SC_ThreadCreate:
 		  {
-		    DEBUG ('x', "ThreadCreate, initiated by user program.\n");
+		    DEBUG ('s', "ThreadCreate, initiated by user program.\n");
 			
 			int func = machine->ReadRegister (4);
 			int args = machine->ReadRegister (5);
@@ -164,12 +164,12 @@ ExceptionHandler (ExceptionType which)
 			int ret = do_ThreadCreate(func, args);
 
 			machine->WriteRegister (2, ret);
-			DEBUG ('x', "exception finished.\n");
+			DEBUG ('s', "exception finished.\n");
 		    break;
 		  }
 		  case SC_ThreadExit:
 		  {
-		    DEBUG ('x', "ThreadExit, initiated by user program.\n");
+		    DEBUG ('s', "ThreadExit, initiated by user program.\n");
 			
 			do_ThreadExit();
 
@@ -177,7 +177,7 @@ ExceptionHandler (ExceptionType which)
 		  }
 		  case SC_ForkExec:
 		  {
-		    DEBUG ('x', "ForkExec, initiated by user program.\n");
+		    DEBUG ('s', "ForkExec, initiated by user program.\n");
 			
 			int arg = machine->ReadRegister (4);
 
@@ -186,7 +186,7 @@ ExceptionHandler (ExceptionType which)
 			int ret = do_ForkExec(bufferString);
 
 			machine->WriteRegister (2, ret);
-			DEBUG ('x', "ForkExec finished.\n");
+			DEBUG ('s', "ForkExec finished.\n");
 		    break;
 		  }
 		#endif // CHANGED

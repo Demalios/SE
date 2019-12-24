@@ -71,6 +71,7 @@ void do_ThreadExit(void)
 
 int do_ForkExec(const char *s)
 {
+    DEBUG ('s', "start ForkExec\n");
     OpenFile *executable = fileSystem->Open(s);
 
     if (executable == NULL)
@@ -85,20 +86,20 @@ int do_ForkExec(const char *s)
     // thread create
     try
     {
-        DEBUG ('x', "creating thread\n");
+        DEBUG ('s', "creating thread\n");
         Thread* newThread = new Thread("New Thread") ;
 
         newThread->space = new AddrSpace (executable);
         newThread->space->InitRegisters ();	// set the initial register values
         newThread->space->RestoreState ();	// load page table register
-        DEBUG ('x', "thread created\n");
+        DEBUG ('s', "thread created\n");
 
         delete executable;		// close file
         machine->Run();
     }
     catch(int e)
     {
-        DEBUG ('x', "Error in ForkExec().\n");
+        DEBUG ('s', "Error in ForkExec().\n");
         delete executable;		// close file
         return -1;
     }
