@@ -86,14 +86,6 @@ Exec:
 	j	$31
 	.end Exec
 
-	.globl ForkExec
-	.ent	ForkExec
-ForkExec:
-	addiu $2,$0,SC_ForkExec
-	syscall
-	j	$31
-	.end ForkExec
-
 	.globl Join
 	.ent	Join
 Join:
@@ -206,6 +198,14 @@ ThreadExit:
 	syscall
 	j	$31
 	.end ThreadExit
+
+.globl ForkExec
+	.ent	ForkExec
+ForkExec:
+	addiu $2,$0,SC_ForkExec
+	syscall
+	j	$31
+	.end ForkExec
 #endif // CHANGED
 	
 /* dummy function to keep gcc happy */
