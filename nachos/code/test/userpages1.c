@@ -1,5 +1,4 @@
 #include "syscall.h"
-#include "syscall.h"
 
 #define THIS "aaa"
 #define THAT "bbb"
