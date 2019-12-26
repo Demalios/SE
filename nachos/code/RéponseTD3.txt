@@ -25,7 +25,7 @@ On risque d'avoir trop de pages demandées par rapport à notre capacité maxima
 Partie II ( Exécuter plusieur programme en même temps ) :
 
 .1
-code/test/start.S code/userprog/syscall.h code/userprog/exception.cc
+voir code/test/start.S code/userprog/syscall.h code/userprog/exception.cc et code/userprog/userthread.cc
 
 .2
 

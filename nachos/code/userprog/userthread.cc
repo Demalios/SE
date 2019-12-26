@@ -69,10 +69,8 @@ void do_ThreadExit(void)
 }
 
 
-static void StartUserFork(void *p)
+static void StartUserFork(void *)
 {
-  if(p != NULL)
-    DEBUG('s', "%p\n", p);
   currentThread->space->InitRegisters ();	// set the initial register values
   currentThread->space->RestoreState ();	// load page table register
   machine->Run();
@@ -101,12 +99,9 @@ int do_ForkExec(const char *s)
 
         newThread->space = new AddrSpace (executable);
 	newThread->Start(StartUserFork, NULL);
-        //newThread->space->InitRegisters ();	// set the initial register values
-        //newThread->space->RestoreState ();	// load page table register
         DEBUG ('s', "thread created\n");
 
         delete executable;		// close file
-        //machine->Run();
     }
     catch(int e)
     {
