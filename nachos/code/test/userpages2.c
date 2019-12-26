@@ -19,7 +19,8 @@ void putchar_thread(void *c)
 
 int main()
 {
-    for(int i = 0; i<= 12 ; i++){
+    int i;
+    for( i = 0; i<= 12 ; i++){
 	    char c = '2';
 	    ThreadCreate(putchar_thread, &c);
     }
